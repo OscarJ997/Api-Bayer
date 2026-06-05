@@ -1,0 +1,86 @@
+[
+  {
+    "relevante": true,
+    "titulo_ejecutivo": "Invima emite recomendaciones sobre uso seguro y registro sanitario de dispositivos de ortodoncia",
+    "pais": "Colombia",
+    "autoridad": "Instituto Nacional de Vigilancia de Medicamentos y Alimentos – Invima",
+    "prioridad": "Alta",
+    "fecha_publicacion": "2026-04-10",
+    "url_fuente": "https://www.invima.gov.co/blog/sala-de-prensa-13/invima-entrega-recomendaciones-para-el-uso-seguro-de-dispositivos-de-ortodoncia-417",
+    "resumen_tecnico": "El Invima orienta sobre el uso seguro de dispositivos médicos empleados en ortodoncia y recuerda verificar registro sanitario o autorización vigente. Advierte precaución frente a alineadores, brackets y otros productos comercializados por redes sociales o canales informales.\n\nLa entidad cita el Decreto 4725 de 2005 y la Resolución 214 de 2022, indicando requisitos de calidad, seguridad, desempeño, trazabilidad, evaluación clínica y supervisión odontológica.",
+    "analisis_impacto": "Impacto potencial bajo para Bayer, sujeto a validación del portafolio local. La publicación no menciona a Bayer ni productos específicos de la compañía, pero aborda dispositivos médicos odontológicos sujetos a registro sanitario y controles de comercialización. Se recomienda validar si existen productos, distribuidores o actividades relacionadas con categorías odontológicas en Colombia.",
+    "recomendacion_preliminar": "Validar con el equipo regulatorio local si las categorías de dispositivos odontológicos mencionadas corresponden al portafolio o canales de Bayer en Colombia, y confirmar cumplimiento de registro sanitario/autorización vigente cuando aplique.",
+    "resumen_puntos": [
+      "Invima recomienda verificar registro sanitario o autorización vigente en dispositivos de ortodoncia.",
+      "Advierte riesgos por productos sin registro, procedencia desconocida o canales no autorizados.",
+      "Cita Decreto 4725 de 2005 y Resolución 214 de 2022 para dispositivos médicos bucales."
+    ],
+    "tipo_publicacion": "Comunicado oficial",
+    "sector": [
+      "Dispositivos médicos",
+      "Salud humana",
+      "Trámites sanitarios"
+    ],
+    "nivel_confianza": "Bajo",
+    "riesgos_identificados": [
+      "Riesgo de incumplimiento por uso o comercialización de dispositivos médicos sin registro sanitario vigente",
+      "Riesgo de afectación a la seguridad del paciente por productos de procedencia desconocida",
+      "Riesgo reputacional por canales informales o no autorizados"
+    ],
+    "obligaciones_o_acciones": [
+      {
+        "accion_requerida": "Verificar que los dispositivos médicos utilizados cuenten con registro sanitario vigente o autorización del Invima.",
+        "responsable_sugerido": "Profesional en odontología",
+        "plazo": "No especificado",
+        "estado": "Explícito en la fuente"
+      },
+      {
+        "accion_requerida": "Abstenerse de adquirir brackets, alineadores dentales u otros dispositivos odontológicos por redes sociales, ventas informales o plataformas no autorizadas.",
+        "responsable_sugerido": "Usuarios y pacientes",
+        "plazo": "No especificado",
+        "estado": "Explícito en la fuente"
+      },
+      {
+        "accion_requerida": "Validar si las categorías de dispositivos odontológicos mencionadas corresponden al portafolio o canales comerciales de Bayer en Colombia.",
+        "responsable_sugerido": "Equipo regulatorio local",
+        "plazo": "No especificado",
+        "estado": "Inferido preliminarmente"
+      }
+    ],
+    "productos_o_categorias_mencionadas": [
+      "Dispositivos médicos empleados en tratamientos de ortodoncia",
+      "Alineadores",
+      "Brackets",
+      "Arcos",
+      "Ligaduras",
+      "Dispositivos Médicos Sobre Medida Bucal (DMSMB)",
+      "Dispositivos odontológicos"
+    ],
+    "entidades_mencionadas": [
+      "Instituto Nacional de Vigilancia de Medicamentos y Alimentos – Invima",
+      "Secretaría de Salud territorial"
+    ],
+    "palabras_clave_regulatorias": [
+      "Registro sanitario",
+      "Autorización sanitaria",
+      "Dispositivos médicos",
+      "Vigilancia sanitaria",
+      "Importación",
+      "Distribución",
+      "Trazabilidad",
+      "Evaluación clínica",
+      "Canales no autorizados",
+      "Denuncias"
+    ],
+    "fechas_clave": [
+      {
+        "tipo_fecha": "Publicación",
+        "fecha": "2026-04-10",
+        "descripcion": "Fecha indicada en la publicación oficial del Invima."
+      }
+    ],
+    "requiere_revision_humana": true,
+    "razon_revision_humana": "Se requiere validar si las categorías de dispositivos odontológicos mencionadas corresponden al portafolio o canales comerciales de Bayer en Colombia antes de definir acciones formales.",
+    "evidencia_textual_relevante": "[{\"fragmento\":\"verificar que los dispositivos utilizados cuenten con registro sanitario o autorización vigente.\",\"por_que_es_relevante\":\"Soporta la identificación de requisitos regulatorios aplicables a dispositivos médicos de ortodoncia.\"},{\"fragmento\":\"El uso de dispositivos médicos sin registro sanitario vigente, de procedencia desconocida o comercializados por canales no autorizados puede generar complicaciones clínicas\",\"por_que_es_relevante\":\"Sustenta la prioridad alta por posible riesgo para la seguridad del paciente.\"},{\"fragmento\":\"los brackets, arcos, ligaduras y demás productos utilizados en ortodoncia son considerados dispositivos médicos\",\"por_que_es_relevante\":\"Identifica categorías reguladas explícitamente por la fuente oficial.\"}]"
+  }
+]

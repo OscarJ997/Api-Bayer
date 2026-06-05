@@ -1,0 +1,395 @@
+{
+	"info": {
+		"_postman_id": "bayer-api-regulatory-insights",
+		"name": "Bayer API - Regulatory Insights",
+		"description": "API para recibir y consultar insights regulatorios desde n8n.\n\n**Configuración:**\n1. Importa el entorno `Bayer-api.local.postman_environment.json`\n2. Ajusta `api_token` para que coincida con `N8N_API_TOKEN` en tu `.env`\n3. Inicia el servidor: `php artisan serve`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "api_token",
+			"value": "change-me-in-production"
+		},
+		{
+			"key": "insight_id",
+			"value": "1"
+		}
+	],
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/up",
+							"host": ["{{base_url}}"],
+							"path": ["up"]
+						},
+						"description": "No requiere token. Verifica que Laravel esté en ejecución."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Regulatory Insights",
+			"item": [
+				{
+					"name": "Crear (batch n8n)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201 || pm.response.code === 200) {",
+									"    const json = pm.response.json();",
+									"    if (json.data && json.data[0] && json.data[0].id) {",
+									"        pm.collectionVariables.set('insight_id', json.data[0].id);",
+									"        pm.environment.set('insight_id', json.data[0].id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"relevante\": false,\n    \"titulo_ejecutivo\": \"Invima presenta actividades territoriales e InvimÁgil en Guainía para trámites sanitarios\",\n    \"pais\": \"Colombia\",\n    \"autoridad\": \"Instituto Nacional de Vigilancia de Medicamentos y Alimentos (Invima)\",\n    \"prioridad\": \"Baja\",\n    \"fecha_publicacion\": \"2026-04-20\",\n    \"url_fuente\": \"https://www.invima.gov.co/blog/sala-de-prensa-13/ejemplo-prueba-postman\",\n    \"resumen_tecnico\": \"El Invima participará en actividades institucionales en Inírida, Guainía, del 20 al 23 de abril de 2026.\",\n    \"analisis_impacto\": \"La publicación tiene carácter informativo y operativo, sin evidenciar cambios normativos.\",\n    \"recomendacion_preliminar\": \"Monitorear si Invima emite lineamientos adicionales sobre InvimÁgil.\",\n    \"resumen_puntos\": [\n      \"Actividades institucionales en Inírida, Guainía, del 20 al 23 de abril de 2026.\",\n      \"Presentación de InvimÁgil para registros, permisos y notificaciones sanitarias en línea.\"\n    ]\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"]
+						},
+						"description": "Formato principal de n8n: array JSON con uno o más objetos.\n\nIdempotencia: si `url_fuente` ya existe, actualiza el registro."
+					},
+					"response": []
+				},
+				{
+					"name": "Crear (objeto único)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"relevante\": true,\n  \"titulo_ejecutivo\": \"Prueba objeto único Postman\",\n  \"pais\": \"México\",\n  \"autoridad\": \"COFEPRIS\",\n  \"prioridad\": \"Alta\",\n  \"fecha_publicacion\": \"2026-05-01\",\n  \"url_fuente\": \"https://example.com/prueba-objeto-unico\",\n  \"resumen_tecnico\": \"Resumen de prueba.\",\n  \"analisis_impacto\": \"Análisis de prueba.\",\n  \"recomendacion_preliminar\": \"Recomendación de prueba.\",\n  \"resumen_puntos\": [\"Punto 1\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"]
+						},
+						"description": "Compatibilidad: también acepta un solo objeto `{ ... }` en lugar del array."
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights?per_page=15&sort_by=created_at&sort_dir=desc",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "15"
+								},
+								{
+									"key": "sort_by",
+									"value": "created_at",
+									"description": "created_at | fecha_publicacion | prioridad | titulo_ejecutivo"
+								},
+								{
+									"key": "sort_dir",
+									"value": "desc",
+									"description": "asc | desc"
+								}
+							]
+						},
+						"description": "Lista paginada de insights."
+					},
+					"response": []
+				},
+				{
+					"name": "Listar - filtrar por prioridad",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights?prioridad=Alta,Media&pais=Colombia&sort_by=prioridad&sort_dir=asc",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"],
+							"query": [
+								{
+									"key": "prioridad",
+									"value": "Alta,Media",
+									"description": "Alta | Media | Baja (separar con coma)"
+								},
+								{
+									"key": "pais",
+									"value": "Colombia"
+								},
+								{
+									"key": "relevante",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "requiere_revision_humana",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "pendiente",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "Invima",
+									"disabled": true
+								},
+								{
+									"key": "sort_by",
+									"value": "prioridad"
+								},
+								{
+									"key": "sort_dir",
+									"value": "asc"
+								}
+							]
+						},
+						"description": "Filtros disponibles: prioridad, pais, relevante, requiere_revision_humana, estado, autoridad, search."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights/{{insight_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights", "{{insight_id}}"]
+						},
+						"description": "Detalle de un insight. Usa la variable `insight_id` (se guarda automáticamente al crear en batch)."
+					},
+					"response": []
+				},
+				{
+					"name": "Ver por ID (con payload original)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights/{{insight_id}}?include_payload=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights", "{{insight_id}}"],
+							"query": [
+								{
+									"key": "include_payload",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Incluye el JSON original que envió n8n en `payload_original`."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prioridad\": \"Media\",\n  \"estado\": \"en_revision\",\n  \"requiere_revision_humana\": true,\n  \"razon_revision_humana\": \"Revisión manual desde Postman\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights/{{insight_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights", "{{insight_id}}"]
+						},
+						"description": "Actualización parcial de campos. Estados: pendiente | en_revision | revisado | descartado"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prioridad\": \"Alta\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights/{{insight_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights", "{{insight_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights/{{insight_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights", "{{insight_id}}"]
+						},
+						"description": "Elimina el registro. Respuesta: 204 sin body."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Errores (referencia)",
+			"item": [
+				{
+					"name": "401 - Sin token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"]
+						},
+						"description": "Prueba de seguridad: debe responder 401."
+					},
+					"response": []
+				},
+				{
+					"name": "422 - Prioridad inválida",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"titulo_ejecutivo\": \"Prueba error validación\",\n    \"prioridad\": \"Urgente\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/regulatory-insights",
+							"host": ["{{base_url}}"],
+							"path": ["api", "regulatory-insights"]
+						},
+						"description": "Debe responder 422: prioridad solo acepta Alta, Media o Baja."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
